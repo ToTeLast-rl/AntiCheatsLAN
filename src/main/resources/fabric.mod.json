@@ -1,0 +1,33 @@
+{
+	"schemaVersion": 1,
+	"id": "anticheatslan",
+	"version": "${version}",
+	"name": "AntiCheatsLAN",
+	"description": "Native 26.1 utility to prevent accidental cheating by removing the 'Allow Commands' button from the LAN menu.",
+	"authors": [
+		"burak"
+	],
+	"contact": {
+		"sources": "https://github.com/burak/AntiCheatsLAN"
+	},
+	"license": "MIT",
+	"icon": "assets/anticheatslan/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"com.burak.anticheatslan.AntiCheatsLANClient"
+		]
+	},
+	"mixins": [
+		{
+			"config": "anticheatslan.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.5",
+		"minecraft": "~26.1",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
