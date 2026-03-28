@@ -1,9 +1,15 @@
-# Fabric Example Mod
+# AntiCheatsLAN (Minecraft 26.1)
 
-## Setup
+A native utility mod for **Minecraft 26.1 ("Tiny Takeover")** that disables the "Allow Commands" button in the LAN menu.
 
-For setup instructions please see the [fabric documentation page](https://docs.fabricmc.net/develop/getting-started/setting-up) that relates to the IDE that you are using.
+## ✨ Features
+* **Native 26.1 Support:** Built for the latest unobfuscated environment.
+* **Java 25 Ready:** Fully compatible with the 26.1 runtime requirements.
+* **Lightweight:** Client-side only utility.
 
-## License
+## 🛠 Installation
+1. Install [Fabric Loader](https://fabricmc.net/).
+2. Place the JAR into your mods folder.
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## 📜 License
+Licensed under **MIT**. Developed by [ToTeLast-rl](https://github.com/ToTeLast-rl/AntiCheatsLAN).
