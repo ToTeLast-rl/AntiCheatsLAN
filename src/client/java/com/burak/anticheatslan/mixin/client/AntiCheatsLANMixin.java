@@ -7,31 +7,34 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Mixin(ShareToLanScreen.class)
 public class AntiCheatsLANMixin {
     @Inject(at = @At("TAIL"), method = "init")
     private void modifyButtons(CallbackInfo info) {
         ShareToLanScreen screen = (ShareToLanScreen)(Object)this;
 
-        // Hide the Cheats button
-        screen.children().stream()
+        // Grab all buttons and sort them top-to-bottom, then left-to-right
+        List<AbstractButton> buttons = screen.children().stream()
             .filter(child -> child instanceof AbstractButton)
             .map(child -> (AbstractButton) child)
-            .filter(button -> button.getMessage().getString().toLowerCase().contains("commands"))
-            .forEach(button -> {
-                button.visible = false;
-                button.active = false;
-            });
+            .sorted(Comparator.comparingInt(AbstractButton::getY).thenComparingInt(AbstractButton::getX))
+            .toList();
 
-        // Find and center the Game Mode button
-        screen.children().stream()
-            .filter(child -> child instanceof AbstractButton)
-            .map(child -> (AbstractButton) child)
-            .filter(button -> button.getMessage().getString().toLowerCase().contains("mode"))
-            .findFirst()
-            .ifPresent(button -> {
-                int centeredX = (screen.width / 2) - (button.getWidth() / 2);
-                button.setX(centeredX);
-            });
+        // Ensure we found the buttons before modifying
+        if (buttons.size() >= 2) {
+            AbstractButton gameModeButton = buttons.get(0); // Top Left
+            AbstractButton cheatsButton = buttons.get(1);   // Top Right
+
+            // Hide the Cheats button
+            cheatsButton.visible = false;
+            cheatsButton.active = false;
+
+            // Center the Game Mode button
+            int centeredX = (screen.width / 2) - (gameModeButton.getWidth() / 2);
+            gameModeButton.setX(centeredX);
+        }
     }
 }
